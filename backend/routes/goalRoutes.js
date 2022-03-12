@@ -8,9 +8,11 @@ const {
   deleteGoal,
 } = require("../controllers/goalController");
 
-router.route("/").get(getGoals).post(postGoal);
-router.route("/:id").put(putGoal).delete(deleteGoal);
+const { protect } = require("../middleware/authMiddleware");
+router.route("/").get(protect, getGoals).post(protect, postGoal);
+router.route("/:id").put(protect, putGoal).delete(protect, deleteGoal);
 
 module.exports = router;
 
+// router.get("/",getGoals);
 // no touching anymore
